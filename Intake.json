@@ -1,0 +1,1093 @@
+{
+  "name": "Intake",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "form submtion",
+        "formDescription": "Enter your data",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Full Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Position",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "AI Automation Engineer (Junior)"
+                  },
+                  {
+                    "option": "Data Analyst"
+                  },
+                  {
+                    "option": "Customer Support Specialist"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "CV",
+              "fieldType": "file"
+            },
+            {
+              "fieldLabel": "Motivation",
+              "fieldType": "textarea"
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "customCss": "\n:root {\n  --font-family: 'Inter', 'Open Sans', sans-serif;\n  --font-weight-normal: 400;\n  --font-weight-bold: 700;\n\n  /* Typography */\n  --font-size-body: 13px;\n  --font-size-label: 14px;\n  --font-size-test-notice: 12px;\n  --font-size-input: 14px;\n  --font-size-header: 25px;\n  --font-size-paragraph: 14px;\n  --font-size-link: 13px;\n  --font-size-error: 12px;\n  --font-size-html-h1: 32px;\n  --font-size-html-h2: 24px;\n  --font-size-html-h3: 19px;\n  --font-size-html-h4: 16px;\n  --font-size-html-h5: 14px;\n  --font-size-html-h6: 12px;\n  --font-size-subheader: 15px;\n\n  /* Colors */\n  --color-background: #fff5ef;\n  --color-test-notice-text: #a66a22;\n  --color-test-notice-bg: #fff3dc;\n  --color-test-notice-border: #f1d5a5;\n\n  --color-card-bg: #ffffff;\n  --color-card-border: #f0ded5;\n  --color-card-shadow: rgba(119, 43, 48, 0.09);\n\n  --color-link: #b65d50;\n  --color-header: #47252d;\n  --color-label: #63434a;\n\n  --color-input-border: #e8d5d0;\n  --color-input-text: #49343a;\n  --color-focus-border: #d76b50;\n\n  --color-submit-btn-bg: #a83f46;\n  --color-submit-btn-text: #ffffff;\n\n  --color-error: #d93648;\n  --color-required: #d76b50;\n  --color-clear-button-bg: #a77b75;\n\n  --color-html-text: #654a4d;\n  --color-html-link: #cf604b;\n  --color-header-subtext: #a18483;\n\n  /* Border Radii */\n  --border-radius-card: 18px;\n  --border-radius-input: 10px;\n  --border-radius-clear-btn: 50%;\n  --card-border-radius: 18px;\n\n  /* Spacing */\n  --padding-container-top: 36px;\n  --padding-card: 30px;\n  --padding-test-notice-vertical: 14px;\n  --padding-test-notice-horizontal: 24px;\n  --margin-bottom-card: 20px;\n  --padding-form-input: 14px;\n  --card-padding: 30px;\n  --card-margin-bottom: 20px;\n\n  /* Dimensions */\n  --container-width: 480px;\n  --submit-btn-height: 52px;\n  --checkbox-size: 19px;\n\n  /* Others */\n  --box-shadow-card: 0px 10px 30px 0px var(--color-card-shadow);\n  --opacity-placeholder: 0.55;\n}\n"
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        0,
+        0
+      ],
+      "id": "ca6288de-f307-459e-9337-203f5f4cd732",
+      "name": "On form submission",
+      "webhookId": "b0267256-80c5-429c-adb4-c034aa407bba"
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "completionTitle": "Error occurred",
+        "completionMessage": "there has been an error",
+        "options": {
+          "customCss": "\n:root {\n  --font-family: 'Inter', 'Open Sans', sans-serif;\n  --font-weight-normal: 400;\n  --font-weight-bold: 700;\n\n  /* Typography */\n  --font-size-body: 13px;\n  --font-size-label: 14px;\n  --font-size-test-notice: 12px;\n  --font-size-input: 14px;\n  --font-size-header: 24px;\n  --font-size-paragraph: 14px;\n  --font-size-link: 13px;\n  --font-size-error: 12px;\n  --font-size-html-h1: 30px;\n  --font-size-html-h2: 23px;\n  --font-size-html-h3: 18px;\n  --font-size-html-h4: 16px;\n  --font-size-html-h5: 14px;\n  --font-size-html-h6: 12px;\n  --font-size-subheader: 15px;\n\n  /* Colors */\n  --color-background: #0b1020;\n\n  --color-test-notice-text: #fbbf24;\n  --color-test-notice-bg: #29210f;\n  --color-test-notice-border: #6b4d19;\n\n  --color-card-bg: #151d32;\n  --color-card-border: #293653;\n  --color-card-shadow: rgba(0, 0, 0, 0.35);\n\n  --color-link: #60a5fa;\n  --color-header: #f1f5ff;\n  --color-label: #c5d0e8;\n\n  --color-input-border: #354463;\n  --color-input-text: #f1f5ff;\n  --color-focus-border: #8b5cf6;\n\n  --color-submit-btn-bg: #7c3aed;\n  --color-submit-btn-text: #ffffff;\n\n  --color-error: #fb7185;\n  --color-required: #f472b6;\n  --color-clear-button-bg: #64748b;\n\n  --color-html-text: #d1d9ec;\n  --color-html-link: #38bdf8;\n  --color-header-subtext: #94a3b8;\n\n  /* Border Radii */\n  --border-radius-card: 18px;\n  --border-radius-input: 10px;\n  --border-radius-clear-btn: 50%;\n  --card-border-radius: 18px;\n\n  /* Spacing */\n  --padding-container-top: 36px;\n  --padding-card: 30px;\n  --padding-test-notice-vertical: 14px;\n  --padding-test-notice-horizontal: 22px;\n  --margin-bottom-card: 20px;\n  --padding-form-input: 14px;\n  --card-padding: 30px;\n  --card-margin-bottom: 20px;\n\n  /* Dimensions */\n  --container-width: 480px;\n  --submit-btn-height: 52px;\n  --checkbox-size: 19px;\n\n  /* Others */\n  --box-shadow-card: 0px 12px 35px 0px var(--color-card-shadow);\n  --opacity-placeholder: 0.55;\n}\n"
+        }
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.5,
+      "position": [
+        656,
+        96
+      ],
+      "id": "806f7d8d-16a8-47c3-ad66-647cbf230c89",
+      "name": "Form",
+      "webhookId": "38c78b62-5c2b-47f0-9d30-62e93fef0c15"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "e2725c63-3d1c-4ec8-a202-da8f9ab54f44",
+              "leftValue": "={{ $json.alreadyExists }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1056,
+        -128
+      ],
+      "id": "b3722e7b-500a-4975-84ba-16d3648a8f83",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "completionTitle": "You have applied before ",
+        "completionMessage": "we will send to you",
+        "options": {
+          "customCss": "\n:root {\n  --font-family: 'Inter', 'Open Sans', sans-serif;\n  --font-weight-normal: 400;\n  --font-weight-bold: 700;\n\n  /* Typography */\n  --font-size-body: 13px;\n  --font-size-label: 14px;\n  --font-size-test-notice: 12px;\n  --font-size-input: 14px;\n  --font-size-header: 24px;\n  --font-size-paragraph: 14px;\n  --font-size-link: 13px;\n  --font-size-error: 12px;\n  --font-size-html-h1: 30px;\n  --font-size-html-h2: 23px;\n  --font-size-html-h3: 18px;\n  --font-size-html-h4: 16px;\n  --font-size-html-h5: 14px;\n  --font-size-html-h6: 12px;\n  --font-size-subheader: 15px;\n\n  /* Colors */\n  --color-background: #101b1a;\n  --color-test-notice-text: #e9c46a;\n  --color-test-notice-bg: #29291e;\n  --color-test-notice-border: #65552b;\n\n  --color-card-bg: #192725;\n  --color-card-border: #304541;\n  --color-card-shadow: rgba(0, 0, 0, 0.25);\n\n  --color-link: #69c9b5;\n  --color-header: #f0f7f3;\n  --color-label: #c3d5ce;\n\n  --color-input-border: #3a5550;\n  --color-input-text: #f0f7f3;\n  --color-focus-border: #4dd4ac;\n\n  --color-submit-btn-bg: #20a889;\n  --color-submit-btn-text: #ffffff;\n\n  --color-error: #ff6b7a;\n  --color-required: #e9c46a;\n  --color-clear-button-bg: #66857b;\n\n  --color-html-text: #d0dfd8;\n  --color-html-link: #65d6bd;\n  --color-header-subtext: #91aaa0;\n\n  /* Border Radii */\n  --border-radius-card: 16px;\n  --border-radius-input: 10px;\n  --border-radius-clear-btn: 50%;\n  --card-border-radius: 16px;\n\n  /* Spacing */\n  --padding-container-top: 36px;\n  --padding-card: 30px;\n  --padding-test-notice-vertical: 14px;\n  --padding-test-notice-horizontal: 22px;\n  --margin-bottom-card: 20px;\n  --padding-form-input: 14px;\n  --card-padding: 30px;\n  --card-margin-bottom: 20px;\n\n  /* Dimensions */\n  --container-width: 480px;\n  --submit-btn-height: 52px;\n  --checkbox-size: 19px;\n\n  /* Others */\n  --box-shadow-card: 0px 10px 30px 0px var(--color-card-shadow);\n  --opacity-placeholder: 0.55;\n}\n"
+        }
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.5,
+      "position": [
+        1312,
+        -224
+      ],
+      "id": "78e187fc-992c-4c44-a2e2-79b22fd43dce",
+      "name": "Form1",
+      "webhookId": "78d4bead-8188-46dc-be81-bb29d9e38798"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_ID",
+          "mode": "list",
+          "cachedResultName": "testing"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Applied At": "={{ $now }}",
+            "Name": "={{ $('Check Duplicate').item.json.name }}",
+            "Motivation": "={{ $('Check Duplicate').item.json.motivation }}",
+            "Position": "={{ $('Check Duplicate').item.json.position }}",
+            "CV File ID": "={{ $json.id }}",
+            "CV Link": "=YOUR_GOOGLE_URL $json.id }}/view",
+            "Email": "={{ $('Check Duplicate').item.json.email }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "Applied At",
+              "displayName": "Applied At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Position",
+              "displayName": "Position",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Motivation",
+              "displayName": "Motivation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CV File ID",
+              "displayName": "CV File ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CV Link",
+              "displayName": "CV Link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Score",
+              "displayName": "Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "\tRecommendation",
+              "displayName": "\tRecommendation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Years Experience",
+              "displayName": "Years Experience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Top Skills",
+              "displayName": "Top Skills",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Matched",
+              "displayName": "Matched",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Missing",
+              "displayName": "Missing",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Read Method",
+              "displayName": "Read Method",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Problems",
+              "displayName": "Problems",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Evaluated At",
+              "displayName": "Evaluated At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "insert your CV",
+              "displayName": "insert your CV",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "submittedAt",
+              "displayName": "submittedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "formMode",
+              "displayName": "formMode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "alreadyExists",
+              "displayName": "alreadyExists",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "kind",
+              "displayName": "kind",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "mimeType",
+              "displayName": "mimeType",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "starred",
+              "displayName": "starred",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "trashed",
+              "displayName": "trashed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "explicitlyTrashed",
+              "displayName": "explicitlyTrashed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "parents",
+              "displayName": "parents",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "spaces",
+              "displayName": "spaces",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "version",
+              "displayName": "version",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "webContentLink",
+              "displayName": "webContentLink",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "webViewLink",
+              "displayName": "webViewLink",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "iconLink",
+              "displayName": "iconLink",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "hasThumbnail",
+              "displayName": "hasThumbnail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "thumbnailLink",
+              "displayName": "thumbnailLink",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "thumbnailVersion",
+              "displayName": "thumbnailVersion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "viewedByMe",
+              "displayName": "viewedByMe",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "createdTime",
+              "displayName": "createdTime",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "modifiedTime",
+              "displayName": "modifiedTime",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "modifiedByMeTime",
+              "displayName": "modifiedByMeTime",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "modifiedByMe",
+              "displayName": "modifiedByMe",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "owners",
+              "displayName": "owners",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "lastModifyingUser",
+              "displayName": "lastModifyingUser",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "shared",
+              "displayName": "shared",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "ownedByMe",
+              "displayName": "ownedByMe",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "downloadRestrictions",
+              "displayName": "downloadRestrictions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "capabilities",
+              "displayName": "capabilities",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "viewersCanCopyContent",
+              "displayName": "viewersCanCopyContent",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "copyRequiresWriterPermission",
+              "displayName": "copyRequiresWriterPermission",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "writersCanShare",
+              "displayName": "writersCanShare",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "permissions",
+              "displayName": "permissions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "permissionIds",
+              "displayName": "permissionIds",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "originalFilename",
+              "displayName": "originalFilename",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "fullFileExtension",
+              "displayName": "fullFileExtension",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "fileExtension",
+              "displayName": "fileExtension",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "md5Checksum",
+              "displayName": "md5Checksum",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "sha1Checksum",
+              "displayName": "sha1Checksum",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "sha256Checksum",
+              "displayName": "sha256Checksum",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "size",
+              "displayName": "size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "quotaBytesUsed",
+              "displayName": "quotaBytesUsed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "headRevisionId",
+              "displayName": "headRevisionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "isAppAuthorized",
+              "displayName": "isAppAuthorized",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "clientEncryptionDetails",
+              "displayName": "clientEncryptionDetails",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "linkShareMetadata",
+              "displayName": "linkShareMetadata",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "inheritedPermissionsDisabled",
+              "displayName": "inheritedPermissionsDisabled",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1408,
+        112
+      ],
+      "id": "ac2ac286-f1e8-42fe-98aa-2508e1bc5d5d",
+      "name": "Append row in sheet"
+    },
+    {
+      "parameters": {
+        "inputDataFieldName": "=CV",
+        "name": "={{ $now.format('yyyy-MM-dd') }}-{{ $json['name'] }}-{{ $json.position }}.pdf",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "YOUR_ID",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1168,
+        112
+      ],
+      "id": "c2e94dfc-094f-4626-8d74-78230729d1d7",
+      "name": "Upload file"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_ID",
+          "mode": "list",
+          "cachedResultName": "testing"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        656,
+        -96
+      ],
+      "id": "d3f27938-12b9-4842-b0c6-4ba6c29c0655",
+      "name": "Get row(s) in sheet",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first();\nconst f = item.json;\nconst errors = [];\n \nconst name = String(f['Full Name'] || '').trim().replace(/\\s+/g, ' ');\nconst email = String(f.Email || '').trim().toLowerCase();\nconst position = f.Position;\nconst motivation = String(f['Why do you want this job?'] || '').trim();\nconst allowed = ['AI Automation Engineer (Junior)', 'Data Analyst', 'Customer Support Specialist'];\n \nif (name.length < 3 || name.split(' ').length < 2 || !/^[\\p{L} .'-]+$/u.test(name))\n  errors.push('Please enter your full name (first and last name, letters only).');\nif (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/.test(email))\n  errors.push('Please enter a valid email address.');\nif (!allowed.includes(position))\n  errors.push('Please choose one of the listed positions.');\nif (motivation.length > 1500)\n  errors.push('Please keep your motivation under 1500 characters.');\n \nif (!item.binary || !item.binary.CV) {\n  errors.push('Please attach your CV.');\n} else {\n  const buf = await this.helpers.getBinaryDataBuffer(0, 'CV');\n  if (buf.subarray(0, 5).toString() !== '%PDF-') errors.push('Your CV must be a real PDF file (renaming a Word file to .pdf does not work).');\n  if (buf.length > 5 * 1024 * 1024) errors.push('Your CV must be smaller than 5 MB.');\n  if (buf.length < 500) errors.push('Your CV file looks empty or damaged. Please export it again.');\n}\n \nreturn [{\n  json: { name, email, position, motivation, valid: errors.length === 0, errors, errorText: errors.map(e => '- ' + e).join('\\n') },\n  binary: item.binary,\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "aaa68abe-89bf-44ed-95ef-5786ec04bb74",
+      "name": "Validate Submission"
+    },
+    {
+      "parameters": {
+        "jsCode": "const sub = $('Validate Submission').first();\nconst duplicate = $input.all().some(r =>\n  String(r.json.Email || '').toLowerCase() === sub.json.email && r.json.Position === sub.json.position);\nreturn [{ json: { ...sub.json, duplicate }, binary: sub.binary }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        864,
+        -128
+      ],
+      "id": "a1fe35fd-410c-4ca8-8d03-31a9961f003d",
+      "name": "Check Duplicate"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "bcad5528-1686-4068-a4f6-4ff92abac595",
+              "leftValue": "={{ $json.valid }}",
+              "rightValue": "=true",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        432,
+        0
+      ],
+      "id": "7a888e0d-4fcb-4323-9e76-2c9de7557428",
+      "name": "if"
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "completionTitle": "The End",
+        "completionMessage": "Thank you for applying for this job,\nYou will be answered in 48 hours",
+        "options": {
+          "customCss": "\n:root {\n  --font-family: 'Inter', 'Open Sans', sans-serif;\n  --font-weight-normal: 400;\n  --font-weight-bold: 700;\n\n  /* Typography */\n  --font-size-body: 13px;\n  --font-size-label: 14px;\n  --font-size-test-notice: 12px;\n  --font-size-input: 14px;\n  --font-size-header: 25px;\n  --font-size-paragraph: 14px;\n  --font-size-link: 13px;\n  --font-size-error: 12px;\n  --font-size-html-h1: 32px;\n  --font-size-html-h2: 24px;\n  --font-size-html-h3: 19px;\n  --font-size-html-h4: 16px;\n  --font-size-html-h5: 14px;\n  --font-size-html-h6: 12px;\n  --font-size-subheader: 15px;\n\n  /* Colors */\n  --color-background: #0b1020;\n  --color-test-notice-text: #fbbf24;\n  --color-test-notice-bg: #211e30;\n  --color-test-notice-border: #51416e;\n\n  --color-card-bg: #141c31;\n  --color-card-border: #293653;\n  --color-card-shadow: rgba(0, 0, 0, 0.35);\n\n  --color-link: #67d8f5;\n  --color-header: #f4f5ff;\n  --color-label: #c3cde5;\n\n  --color-input-border: #354563;\n  --color-input-text: #f1f5ff;\n  --color-focus-border: #9b72ff;\n\n  --color-submit-btn-bg: #7650e8;\n  --color-submit-btn-text: #ffffff;\n\n  --color-error: #fb7185;\n  --color-required: #f472b6;\n  --color-clear-button-bg: #64748b;\n\n  --color-html-text: #d6def0;\n  --color-html-link: #50d5f5;\n  --color-header-subtext: #929fbe;\n\n  /* Border Radii */\n  --border-radius-card: 20px;\n  --border-radius-input: 12px;\n  --border-radius-clear-btn: 50%;\n  --card-border-radius: 20px;\n\n  /* Spacing */\n  --padding-container-top: 38px;\n  --padding-card: 32px;\n  --padding-test-notice-vertical: 14px;\n  --padding-test-notice-horizontal: 24px;\n  --margin-bottom-card: 20px;\n  --padding-form-input: 15px;\n  --card-padding: 32px;\n  --card-margin-bottom: 20px;\n\n  /* Dimensions */\n  --container-width: 480px;\n  --submit-btn-height: 52px;\n  --checkbox-size: 19px;\n\n  /* Others */\n  --box-shadow-card: 0px 14px 40px 0px var(--color-card-shadow);\n  --opacity-placeholder: 0.55;\n}\n"
+        }
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.5,
+      "position": [
+        1632,
+        112
+      ],
+      "id": "06c7055d-9817-4ba0-b1fc-ee3a469ba774",
+      "name": "Form3",
+      "webhookId": "8d871c3c-5c3a-4cfc-a8b3-51b01000f947"
+    }
+  ],
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Validate Submission",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Form1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Check Duplicate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Submission": {
+      "main": [
+        [
+          {
+            "node": "if",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Duplicate": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "if": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Form3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "errorWorkflow": "3SGKTFWxDemq598B",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "nodeGroups": []
+}

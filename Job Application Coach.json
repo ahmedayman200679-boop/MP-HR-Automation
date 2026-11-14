@@ -1,0 +1,464 @@
+{
+  "name": "Job Application Coach",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Job Application Coach",
+        "formDescription": "Enter your CV and Job Describtion",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Job Describtion",
+              "fieldType": "textarea",
+              "placeholder": "paste the full job post here",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "CV",
+              "fieldType": "file",
+              "multipleFiles": false,
+              "acceptFileTypes": ".pdf",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "respondWithOptions": {
+            "values": {
+              "formSubmittedText": "Thank you for submition "
+            }
+          },
+          "customCss": "\n:root {\n  --font-family: 'Inter', 'Open Sans', sans-serif;\n  --font-weight-normal: 400;\n  --font-weight-bold: 600;\n\n  /* Typography */\n  --font-size-body: 13px;\n  --font-size-label: 14px;\n  --font-size-test-notice: 12px;\n  --font-size-input: 14px;\n  --font-size-header: 24px;\n  --font-size-paragraph: 14px;\n  --font-size-link: 13px;\n  --font-size-error: 12px;\n  --font-size-html-h1: 30px;\n  --font-size-html-h2: 22px;\n  --font-size-html-h3: 18px;\n  --font-size-html-h4: 16px;\n  --font-size-html-h5: 14px;\n  --font-size-html-h6: 12px;\n  --font-size-subheader: 15px;\n\n  /* Colors */\n  --color-background: #f3f6fb;\n  --color-test-notice-text: #b7791f;\n  --color-test-notice-bg: #fffaf0;\n  --color-test-notice-border: #f6dca8;\n\n  --color-card-bg: #ffffff;\n  --color-card-border: #e2e8f0;\n  --color-card-shadow: rgba(15, 23, 42, 0.07);\n\n  --color-link: #2563eb;\n  --color-header: #142b4a;\n  --color-label: #334155;\n\n  --color-input-border: #cbd5e1;\n  --color-input-text: #1e293b;\n  --color-focus-border: #2563eb;\n\n  --color-submit-btn-bg: #1e40af;\n  --color-submit-btn-text: #ffffff;\n\n  --color-error: #dc2626;\n  --color-required: #ef4444;\n  --color-clear-button-bg: #64748b;\n\n  --color-html-text: #334155;\n  --color-html-link: #2563eb;\n  --color-header-subtext: #64748b;\n\n  /* Border Radii */\n  --border-radius-card: 12px;\n  --border-radius-input: 8px;\n  --border-radius-clear-btn: 50%;\n  --card-border-radius: 12px;\n\n  /* Spacing */\n  --padding-container-top: 28px;\n  --padding-card: 28px;\n  --padding-test-notice-vertical: 12px;\n  --padding-test-notice-horizontal: 20px;\n  --margin-bottom-card: 18px;\n  --padding-form-input: 13px;\n  --card-padding: 28px;\n  --card-margin-bottom: 18px;\n\n  /* Dimensions */\n  --container-width: 480px;\n  --submit-btn-height: 48px;\n  --checkbox-size: 18px;\n\n  /* Others */\n  --box-shadow-card: 0px 8px 24px 0px var(--color-card-shadow);\n  --opacity-placeholder: 0.55;\n}\n"
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        0,
+        0
+      ],
+      "id": "ae7445f1-3bb7-486e-a9fe-295035d32c23",
+      "name": "On form submission",
+      "webhookId": "2a35c387-0179-4f99-b199-0370360e9a82"
+    },
+    {
+      "parameters": {
+        "resource": "document",
+        "modelId": {
+          "__rl": true,
+          "value": "YOUR_ID",
+          "mode": "list",
+          "cachedResultName": "models/gemini-flash-lite-latest"
+        },
+        "text": "Transcribe all the text in this CV exactly as written, section by\nsection (contact details, summary, experience, education, skills,\nlanguages, certificates). Return only the transcribed text.",
+        "inputType": "binary",
+        "binaryPropertyName": "CV",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "b01e537e-ced5-4dad-aab5-b2bbd6ce24ef",
+      "name": "Analyze document"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "553b993c-b7f4-4579-ba4f-3c18bbe00694",
+              "name": "name",
+              "value": "={{ $('On form submission').item.json.Name }}",
+              "type": "string"
+            },
+            {
+              "id": "f2e0cc19-54a7-4e8f-a801-aa943520c5c0",
+              "name": "Email",
+              "value": "={{ $('On form submission').item.json.Email }}",
+              "type": "string"
+            },
+            {
+              "id": "0b5b942d-4a38-4060-9c7e-540997ff2a42",
+              "name": "Job Describtion",
+              "value": "={{ $('On form submission').item.json['Job Describtion'] }}",
+              "type": "string"
+            },
+            {
+              "id": "3fb0e847-8ab5-4a2b-a1a2-3880043247e7",
+              "name": "CV text",
+              "value": "={{ $json.content.parts[0].text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        448,
+        0
+      ],
+      "id": "1409f23c-bced-42f3-847a-c3a1bc6c97e3",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=job describtion: {{ $json['Job Describtion'] }}\nname: {{ $json.name }}\nCV text:{{ $json['CV text'] }}",
+        "needsFallback": true,
+        "options": {
+          "systemMessage": "You are a senior career coach who manages a team of three specialist agents, available to you as tools:\n- CV Matcher: scores how well the CV fits the job and lists strengths and gaps.\n- Cover Letter Writer: writes a tailored cover letter.\n- Interview Coach: prepares likely interview questions with model answers.\n \nHow to work:\n1. Call CV Matcher first.\n2. Then call Cover Letter Writer, and include the CV Matcher's strengths and gaps in your task message.\n3. Then call Interview Coach, and include the CV Matcher's gaps in your task message.\n4. Each specialist automatically receives the job description and the CV.\n5. You MUST call all three specialists, each exactly once, before your final answer.\n \nYour final answer is only the opening of the report (the specialists' full work is added automatically after it). Write in Markdown:\n- One greeting line using the candidate's first name.\n- A 2-sentence honest summary of the match, including the score from CV Matcher.\n- ### Your Next 3 Steps: three short, practical action items.\nKeep it under 120 words and encouraging",
+          "returnIntermediateSteps": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        960,
+        0
+      ],
+      "id": "27a3aa1a-57b6-40c8-b88f-8712e8239ea1",
+      "name": "AI Agent",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        688,
+        240
+      ],
+      "id": "1c5e452c-b94d-4a87-b142-a44ec5e49abc",
+      "name": "Groq Chat Model"
+    },
+    {
+      "parameters": {
+        "text": "=You are an experienced technical recruiter. Compare the CV with the job description and reply in exactly this format:\n \n**Match Score: <number>/100**: <one short sentence why>\n \n### Strengths\n4 bullets. Each bullet: the requirement met, then a dash and short proof from the CV (max 15 words).\n \n### Gaps\n3 bullets. Each bullet: the missing skill, then a dash and one practical way to close it (max 20 words).\n \n### Keywords to Add\nOne line with up to 5 comma-separated keywords from the job post the candidate can honestly add to the CV.\n \nBe honest. Never invent experience the CV does not show. Maximum 180 words.\n \nFormatting rules (very important):\n- Never use tables, code blocks or horizontal lines.\n- Use short ### headings and simple bullet points (one line each).\n- No quotes from the CV, just short facts.\n- Be concise.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 3,
+      "position": [
+        816,
+        240
+      ],
+      "id": "1e7c24ef-00be-4faa-9cd1-073bad669ad2",
+      "name": "CV Matcher"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.5-flash-lite",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        800,
+        384
+      ],
+      "id": "89ef63d9-6e65-462c-80e5-eaad068d767d",
+      "name": "Google Gemini Chat Model"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.5-flash-lite",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        1376,
+        416
+      ],
+      "id": "1d0c0b67-fc70-41e2-a8c7-5e1600b0f0c6",
+      "name": "Google Gemini Chat Model1"
+    },
+    {
+      "parameters": {
+        "text": "=You are a professional cover letter writer. Write a complete, ready-to-send cover letter.\n- 3 or 4 short paragraphs, maximum 230 words, plain text paragraphs only.\n- Start with 'Dear Hiring Manager,' and end with 'Kind regards,' and the candidate's name.\n- Use only facts from the CV. Never invent experience, numbers or companies.\n- Connect 2 or 3 strengths to the job requirements, and mention one gap positively as something the candidate is learning.\nReturn only the letter, without a title.\n \nFormatting rules (very important):\n- Never use tables, code blocks or horizontal lines.\n- Use short ### headings and simple bullet points (one line each).\n- No quotes from the CV, just short facts.\n- Be concise.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 3,
+      "position": [
+        1104,
+        240
+      ],
+      "id": "4be39a43-a57f-44c3-bcdc-1ebe2f0867e9",
+      "name": "Cover Letter Writer"
+    },
+    {
+      "parameters": {
+        "text": "=You are an interview coach. Write 5 likely interview questions with short model answers, in exactly this format:\n \n**1. <question>**\n<model answer, maximum 50 words>\n \nInclude: 2 technical questions about the main required skills, 2 behavioral questions (answer briefly in STAR style: situation, action, result), and 1 question about the candidate's biggest gap with an honest learning-plan answer.\nBase every answer on the real CV.\n \nFormatting rules (very important):\n- Never use tables, code blocks or horizontal lines.\n- Use short ### headings and simple bullet points (one line each).\n- No quotes from the CV, just short facts.\n- Be concise.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 3,
+      "position": [
+        1392,
+        240
+      ],
+      "id": "5382f1c7-72c6-45de-a9b5-d05990bd0b09",
+      "name": "Interview Coach"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        1088,
+        400
+      ],
+      "id": "c26d8c95-90a8-4ca8-9043-7889363dc54b",
+      "name": "Groq Chat Model1"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.5-flash-lite",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        608,
+        144
+      ],
+      "id": "55aa6c3b-f8cc-4b01-8242-2a0d0ff04338",
+      "name": "Google Gemini Chat Model2"
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.report }}",
+        "destinationKey": "ReportHTML",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        1952,
+        16
+      ],
+      "id": "3fff6c29-68d4-4abd-adb1-3f6147bc7ad0",
+      "name": "Markdown"
+    },
+    {
+      "parameters": {
+        "jsCode": "const run = $input.first().json;\nconst steps = run.intermediateSteps || [];\n \nconst clean = value => {\n  const text = typeof value === 'string' ? value : JSON.stringify(value);\n  try {\n    const parsed = JSON.parse(text);\n    const first = Array.isArray(parsed) ? parsed[0] : parsed;\n    return first.output ?? first.response ?? first.text ?? text;\n  } catch {\n    return text;\n  }\n};\n \nconst resultOf = word => {\n  const step = steps.filter(s => String(s.action?.tool || '').toLowerCase().includes(word)).pop();\n  return step ? clean(step.observation) : null;\n};\n \nconst sections = [\n  ['Match Analysis', resultOf('matcher'), 'CV Matcher'],\n  ['Tailored Cover Letter', resultOf('letter'), 'Cover Letter Writer'],\n  ['Interview Preparation', resultOf('interview'), 'Interview Coach'],\n];\n \nconst report = [run.output]\n  .concat(sections.map(([title, body, agent]) => '## ' + title + '\\n\\n' + (body || '_The ' + agent + ' did not run this time. Please submit the form again._')))\n  .join('\\n\\n');\n \nreturn [{ json: { report, specialistsUsed: sections.filter(s => s[1]).length } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1536,
+        16
+      ],
+      "id": "b4462a43-1127-4f97-9763-127e9f05e223",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('On form submission').item.json.Email }}",
+        "subject": "Your job application",
+        "message": "=\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>HR Report Dashboard</title>\n\n<style>\n* {\n    box-sizing: border-box;\n}\n\nbody {\n    margin: 0;\n    padding: 35px 20px;\n    font-family: 'Inter', Arial, sans-serif;\n    background: linear-gradient(135deg, #dbeafe 0%, #eef2ff 45%, #e0f2fe 100%);\n    color: #1e293b;\n    min-height: 100vh;\n}\n\n.container {\n    max-width: 1000px;\n    margin: auto;\n}\n\n/* Header */\n.header {\n    background: linear-gradient(120deg, #0f172a, #1e3a8a, #2563eb);\n    color: white;\n    padding: 35px;\n    border-radius: 18px 18px 0 0;\n    position: relative;\n    overflow: hidden;\n}\n\n.header h1 {\n    margin: 0 0 10px;\n    font-size: 27px;\n    font-weight: 700;\n}\n\n.header p {\n    margin: 0;\n    color: #bfdbfe;\n    font-size: 14px;\n}\n\n/* Decorative background */\n.header::after {\n    content: \"\";\n    position: absolute;\n    width: 180px;\n    height: 180px;\n    border-radius: 50%;\n    background: rgba(255,255,255,0.08);\n    right: 35px;\n    top: -75px;\n}\n\n/* Report panel */\n.report-panel {\n    background: rgba(255,255,255,0.96);\n    padding: 35px;\n    border: 1px solid #dbeafe;\n    border-radius: 0 0 18px 18px;\n    box-shadow: 0 15px 40px rgba(30,64,175,0.10);\n}\n\n/* Title */\n.report-title {\n    font-size: 19px;\n    font-weight: 700;\n    color: #142b4a;\n    padding-bottom: 16px;\n    border-bottom: 2px solid #dbeafe;\n    margin-bottom: 25px;\n}\n\n/* Dynamic report */\n.report-content {\n    font-size: 14px;\n    line-height: 1.8;\n    color: #334155;\n    overflow-wrap: anywhere;\n}\n\n.report-content h1,\n.report-content h2,\n.report-content h3 {\n    color: #1e3a8a;\n}\n\n.report-content table {\n    width: 100%;\n    border-collapse: collapse;\n    margin: 20px 0;\n    border-radius: 10px;\n    overflow: hidden;\n}\n\n.report-content th {\n    background: #dbeafe;\n    color: #1e40af;\n    padding: 14px;\n    text-align: left;\n}\n\n.report-content td {\n    padding: 13px;\n    border-bottom: 1px solid #e2e8f0;\n}\n\n.report-content tr:nth-child(even) {\n    background: #f8fafc;\n}\n\n.report-content tr:hover {\n    background: #eff6ff;\n}\n\n.report-content a {\n    color: #2563eb;\n    text-decoration: none;\n}\n\n/* Footer */\n.footer {\n    text-align: center;\n    color: #64748b;\n    font-size: 12px;\n    margin-top: 25px;\n}\n\n@media (max-width: 600px) {\n    body {\n        padding: 12px;\n    }\n\n    .header, .report-panel {\n        padding: 20px;\n    }\n\n    .header h1 {\n        font-size: 22px;\n    }\n\n    .report-content table {\n        display: block;\n        overflow-x: auto;\n    }\n}\n</style>\n</head>\n\n<body>\n\n<div class=\"container\">\n\n    <header class=\"header\">\n        <h1>HR Analytics Report</h1>\n        <p>Candidate Evaluation & Recruitment Insights</p>\n    </header>\n\n    <main class=\"report-panel\">\n\n        <div class=\"report-title\">\n            Candidate Evaluation Report\n        </div>\n\n        <div class=\"report-content\">\n            {{ $json.ReportHTML }}\n        </div>\n\n    </main>\n\n    <footer class=\"footer\">\n        HR Management System | Automated Report\n    </footer>\n\n</div>\n\n</body>\n</html>\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        2176,
+        16
+      ],
+      "id": "63bb6a92-623b-4fbf-ae29-1c6be566e821",
+      "name": "Send a message",
+      "webhookId": "d8890919-14c3-4635-93a1-2937a8c107b3"
+    }
+  ],
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Analyze document",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze document": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CV Matcher": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "CV Matcher",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Interview Coach",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cover Letter Writer": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Interview Coach": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Cover Letter Writer",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Markdown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "errorWorkflow": "3SGKTFWxDemq598B",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "nodeGroups": []
+}

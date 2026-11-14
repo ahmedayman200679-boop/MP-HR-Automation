@@ -1,0 +1,975 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ahmed's Projects | OMNA People AI Workflows</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      
+      --bg: #0b0f19;
+      --bg-card: #111827;
+      --bg-card-subtle: #1a2234;
+      --border: #26334d;
+      --border-focus: #6366f1;
+      
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --text-dim: #6b7280;
+      
+      --accent: #6366f1;
+      --accent-hover: #4f46e5;
+      --accent-light: #e0e7ff;
+      
+      --online-bg: #064e3b;
+      --online-text: #34d399;
+      --online-border: #059669;
+      
+      --offline-bg: #4c1d24;
+      --offline-text: #f87171;
+      --offline-border: #dc2626;
+      
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+
+    /* Typography */
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #f3f4f6;
+      margin-top: 48px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2::before {
+      content: "";
+      display: inline-block;
+      width: 4px;
+      height: 20px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: #1f2937;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      transition: all 0.25s ease;
+    }
+
+    .badge.on {
+      background: var(--online-bg);
+      color: var(--online-text);
+      border-color: var(--online-border);
+    }
+
+    .badge.off {
+      background: var(--offline-bg);
+      color: var(--offline-text);
+      border-color: var(--offline-border);
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    /* Section 1: Hero */
+    .hero {
+      padding: 24px 0 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .config-strip {
+      margin-top: 20px;
+      padding: 12px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.85rem;
+      flex-wrap: wrap;
+    }
+
+    .config-strip input {
+      flex: 1;
+      min-width: 240px;
+      background: #0f172a;
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+
+    .config-strip button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.8rem;
+      transition: background 0.2s ease;
+    }
+
+    .config-strip button:hover {
+      background: var(--accent-hover);
+    }
+
+    /* Section 2: Choose What You Want */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .action-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .action-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 10px 24px -10px rgba(99, 102, 241, 0.3);
+    }
+
+    .action-card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    .action-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .action-card p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .action-card-link {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent-light);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Section 3: Try It */
+    .try-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-top: 16px;
+    }
+
+    #msgs {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      min-height: 220px;
+      max-height: 420px;
+      overflow-y: auto;
+      background: #0d121f;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .me {
+      align-self: flex-end;
+      background: var(--accent);
+      color: white;
+      padding: 8px 14px;
+      border-radius: 12px 12px 2px 12px;
+      font-size: 0.9rem;
+      max-width: 80%;
+      word-break: break-word;
+    }
+
+    .bot {
+      align-self: flex-start;
+      background: var(--bg-card-subtle);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 12px 12px 12px 2px;
+      font-size: 0.9rem;
+      max-width: 85%;
+      white-space: pre-wrap;
+      word-break: break-word;
+      line-height: 1.5;
+    }
+
+    #ask {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    #q {
+      flex: 1;
+      background: #0d121f;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      color: white;
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    #q:focus {
+      border-color: var(--accent);
+    }
+
+    #ask button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 12px 22px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      white-space: nowrap;
+    }
+
+    #ask button:hover {
+      background: var(--accent-hover);
+    }
+
+    .suggest-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .chip {
+      background: var(--bg-card-subtle);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .chip:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .buttons-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+    }
+
+    .btn-action:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-action.secondary {
+      background: var(--bg-card-subtle);
+      border: 1px solid var(--border);
+      color: var(--text);
+      box-shadow: none;
+    }
+
+    .btn-action.secondary:hover {
+      border-color: var(--accent);
+      color: white;
+    }
+
+    a.disabled {
+      pointer-events: none;
+      opacity: 0.45;
+      filter: grayscale(1);
+    }
+
+    /* Section 4: How It Works */
+    .steps-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 16px;
+    }
+
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .step-number {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .step-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .step-card p {
+      font-size: 0.875rem;
+      margin-bottom: 12px;
+    }
+
+    /* Visual Node Graph representation */
+    .nodes-flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      background: #0d121f;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+    }
+
+    .node-pill {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #93c5fd;
+      padding: 4px 8px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
+
+    .node-pill.trigger {
+      background: #451a03;
+      border-color: #78350f;
+      color: #fcd34d;
+    }
+
+    .node-pill.ai {
+      background: #311042;
+      border-color: #581c87;
+      color: #d8b4fe;
+    }
+
+    .node-pill.connector {
+      background: #064e3b;
+      border-color: #065f46;
+      color: #6ee7b7;
+    }
+
+    .node-arrow {
+      color: #64748b;
+      font-weight: bold;
+    }
+
+    /* Section 5: Download */
+    .download-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .download-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: border-color 0.2s ease;
+    }
+
+    .download-item:hover {
+      border-color: var(--accent);
+    }
+
+    .download-info h4 {
+      font-size: 0.95rem;
+      color: white;
+      font-family: var(--font-mono);
+      margin-bottom: 2px;
+    }
+
+    .download-info span {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .btn-download {
+      background: var(--bg-card-subtle);
+      border: 1px solid var(--border);
+      color: var(--accent-light);
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-download:hover {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 20px 14px 60px;
+      }
+      h1 {
+        font-size: 1.85rem;
+      }
+      .buttons-row {
+        flex-direction: column;
+      }
+      .btn-action {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. HERO SECTION -->
+  <header class="hero">
+    <h1>Ahmed's Projects</h1>
+    <p style="font-size: 1.05rem; margin-top: 6px; color: #cbd5e1;">
+      Ask HR, get interview coaching, and apply for roles with production-ready AI automation built on n8n.
+    </p>
+
+    <div class="hero-meta">
+      <span class="badge" id="status">
+        <span class="badge-dot"></span> Checking…
+      </span>
+      <span style="font-size: 0.8rem; color: var(--text-dim);">
+        Powered by n8n, Groq 120B & Google Gemini
+      </span>
+    </div>
+
+    <!-- Live ngrok base URL config strip -->
+    <div class="config-strip">
+      <span style="font-weight: 600; color: #cbd5e1;">n8n ngrok URL:</span>
+      <input type="url" id="ngrokInput" placeholder="https://YOUR-DOMAIN.ngrok-free.app">
+      <button type="button" id="updateNgrokBtn">Connect & Test</button>
+    </div>
+  </header>
+
+  <!-- 2. CHOOSE WHAT YOU WANT -->
+  <section id="choose">
+    <h2>Choose what you want</h2>
+    <p>Select any of the capabilities below to jump right in:</p>
+
+    <div class="cards-grid">
+      <!-- Card 1: Ask HR -->
+      <a href="#ask-hr" class="action-card">
+        <div>
+          <div class="action-card-icon">💬</div>
+          <h3>Ask HR</h3>
+          <p>Get instant, verified answers regarding company policies, PTO, equipment stipends, and insurance benefits from our RAG assistant.</p>
+        </div>
+        <div class="action-card-link">Chat with HR Assistant &rarr;</div>
+      </a>
+
+      <!-- Card 2: Get Coached -->
+      <a href="#try-forms" class="action-card">
+        <div>
+          <div class="action-card-icon">🎯</div>
+          <h3>Get Coached</h3>
+          <p>Submit your target job description and CV to receive tailored match scoring, a customized cover letter, and STAR interview prep.</p>
+        </div>
+        <div class="action-card-link">Get Coaching Report &rarr;</div>
+      </a>
+
+      <!-- Card 3: Apply -->
+      <a href="#try-forms" class="action-card">
+        <div>
+          <div class="action-card-icon">📝</div>
+          <h3>Apply</h3>
+          <p>Submit your candidate profile and resume directly into our automated pipeline with anti-duplicate verification and fast reviews.</p>
+        </div>
+        <div class="action-card-link">Submit Job Application &rarr;</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- 3. TRY IT SECTION -->
+  <section id="try">
+    <h2>Try it</h2>
+    <p>Interact directly with the live n8n workflows and forms below:</p>
+
+    <!-- HR Chat -->
+    <div id="ask-hr" class="try-section">
+      <h3 style="font-size: 1.15rem; color: white; margin-bottom: 4px;">Ask HR Policy Assistant</h3>
+      <p style="font-size: 0.85rem; margin-bottom: 12px;">Ground truth answers retrieved from the company handbook via Google Gemini embeddings.</p>
+
+      <div id="msgs"></div>
+
+      <div class="suggest-chips">
+        <span style="font-size: 0.75rem; color: var(--text-dim); padding: 4px 0;">Suggestions:</span>
+        <button type="button" class="chip" data-q="How many leave days do I get?">How many leave days do I get?</button>
+        <button type="button" class="chip" data-q="What is the remote work and equipment policy?">Remote work & equipment</button>
+        <button type="button" class="chip" data-q="When does health insurance take effect?">Health insurance start date</button>
+        <button type="button" class="chip" data-q="What is the standard probation period?">Probation period</button>
+      </div>
+
+      <form id="ask">
+        <input id="q" placeholder="How many leave days do I get?" required autocomplete="off">
+        <button type="submit">Ask</button>
+      </form>
+    </div>
+
+    <!-- Apply & Coach Form Buttons -->
+    <div id="try-forms" class="try-section" style="margin-top: 20px;">
+      <h3 style="font-size: 1.15rem; color: white; margin-bottom: 4px;">Candidate Applications & Career Coaching</h3>
+      <p style="font-size: 0.85rem; margin-bottom: 14px;">Connected directly to our live n8n public form endpoints:</p>
+
+      <div class="buttons-row">
+        <a id="applyLink" target="_blank" rel="noopener" class="btn-action">
+          <span>📄</span> Apply for a job
+        </a>
+        <a id="coachLink" target="_blank" rel="noopener" class="btn-action secondary">
+          <span>🚀</span> Get a coaching report
+        </a>
+      </div>
+      <p style="font-size: 0.75rem; color: var(--text-dim); margin-top: 10px;">
+        Note: The buttons above open the secure n8n form in a new tab when your n8n instance is Online.
+      </p>
+    </div>
+  </section>
+
+  <!-- 4. HOW IT WORKS SECTION -->
+  <section id="how-it-works">
+    <h2>How it works</h2>
+    <p>Every submission and question executes through production n8n workflows across 5 coordinated stages:</p>
+
+    <div class="steps-container">
+      <!-- Step 1 -->
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-number">1</div>
+          <div class="step-title">Candidate Application Intake & Deduplication</div>
+        </div>
+        <p>The candidate completes a custom form. The workflow checks for prior submissions in Google Sheets within 90 days, stores the CV in Google Drive, and notifies hiring managers.</p>
+        
+        <div class="nodes-flow">
+          <span class="node-pill trigger">⚡ On form submission</span>
+          <span class="node-arrow">&rarr;</span>
+          <span class="node-pill">Validate Submission</span>
+          <span class="node-arrow">&rarr;</span>
+          <span class="node-pill">Check Duplicate</span>
+          <span class="node-arrow">&rarr;</span>
+          <span class="node-pill connector">☁️ Upload file (Drive)</span>
+          <span class="node-arrow">&rarr;</span>
+          <span class="node-pill connector">📊 Append row in sheet</span>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-number">2</div>
+          <div class="step-title">Autonomous AI Resume Scanner & Evaluator (AI Scan)</div>
+        </div>
+        <p>Runs hourly to pull pending candidates from Google Sheets, performs multimodal OCR with Google Gemini on complex PDFs, scores competencies with Groq (120B), and automates email decisions.</p>
+        
+        <div class="nodes-flow">
+          <span class="node-pill trigger">⏰ Every Hour</span>
+          <span class="node-arrow">&rarr;</span>
+          <span class="node-pill connector">📊 Get row(s) in sheet</span>
+          <span class="node-arrow">&rarr;</span>
+          <span class="node-pill ai">👁️ OCR Scanner Gemini</span>
+          <span class="node-arrow">&rarr;</span>
+          <span class="node-pill ai">⚡ Groq 120B Scoring</span>
+          <span class="node-arrow">&rarr;</span>
+          <span class="node-pill">Switch Decision</span>
+          <span class="node-arrow">&rarr;</span>
+          <span class="node-pill connector">✉️ Gmail Update</span>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-number">3</div>
+          <div class="step-title">Multi-Agent Career Advisory & Interview Coach</div>
+        </div>
+        <p>A Senior Career Coach agent coordinates 3 tool sub-agents: CV Matcher evaluates fit, Cover Letter Writer crafts tailored letters, and Interview Coach generates mock questions.</p>
+        
+        <div class="nodes-flow">
+          <span class="node-pill trigger">⚡ Form Submission</span>
+          <span class="node-arrow">&rarr;</span>
+          <span class="node-pill ai">🤖 Lead AI Coach</span>
+          <span class="node-arrow">&rarr;</span>
+          <span class="node-pill ai">🛠️ CV Matcher</span>
+          <span class="node-arrow">+</span>
+          <span class="node-pill ai">🛠️ Cover Letter Writer</span>
+          <span class="node-arrow">+</span>
+          <span class="node-pill ai">🛠️ Interview Coach</span>
+          <span class="node-arrow">&rarr;</span>
+          <span class="node-pill connector">✉️ Email Report</span>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-number">4</div>
+          <div class="step-title">Autonomous HR Policy RAG Assistant</div>
+        </div>
+        <p>Syncs the Employee Handbook from Google Drive, creates vector embeddings via Google Gemini, and uses conversational window memory to answer employee questions with verified citations.</p>
+        
+        <div class="nodes-flow">
+          <span class="node-pill trigger">💬 Chat Trigger</span>
+          <span class="node-arrow">&rarr;</span>
+          <span class="node-pill ai">🧠 Simple Memory</span>
+          <span class="node-arrow">&rarr;</span>
+          <span class="node-pill ai">📚 Simple Vector Store</span>
+          <span class="node-arrow">&rarr;</span>
+          <span class="node-pill ai">🤖 HR Agent (Groq/Gemini)</span>
+          <span class="node-arrow">&rarr;</span>
+          <span class="node-pill">Verified Output</span>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-number">5</div>
+          <div class="step-title">Ops Sentinel & Health Watchdog</div>
+        </div>
+        <p>Traps unexpected workflow errors in real time, applies a 15-minute alert throttle to prevent notification storms, delivers daily 8:00 AM health recaps, and unblocks stuck candidate jobs.</p>
+        
+        <div class="nodes-flow">
+          <span class="node-pill trigger">⚠️ Error Trigger</span>
+          <span class="node-arrow">&rarr;</span>
+          <span class="node-pill">Check Throttle</span>
+          <span class="node-arrow">&rarr;</span>
+          <span class="node-pill connector">📊 Log Error (Sheets)</span>
+          <span class="node-arrow">&rarr;</span>
+          <span class="node-pill connector">✉️ Alert Admin</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. DOWNLOAD SECTION -->
+  <section id="download">
+    <h2>Download</h2>
+    <p>Cleaned workflow files ready for import into your n8n workspace (located in <code>workflows/</code>):</p>
+
+    <div class="download-grid">
+      <!-- 1. AI Scan -->
+      <div class="download-item">
+        <div class="download-info">
+          <h4>AI Scan.json</h4>
+          <span>30 Nodes • Batch OCR & 120B Evaluation</span>
+        </div>
+        <a href="workflows/AI Scan.json" download class="btn-download">Download</a>
+      </div>
+
+      <!-- 2. HR Chatbot -->
+      <div class="download-item">
+        <div class="download-info">
+          <h4>HR Chatbot.json</h4>
+          <span>15 Nodes • RAG Policy Assistant</span>
+        </div>
+        <a href="workflows/HR Chatbot.json" download class="btn-download">Download</a>
+      </div>
+
+      <!-- 3. Intake -->
+      <div class="download-item">
+        <div class="download-info">
+          <h4>Intake.json</h4>
+          <span>11 Nodes • Form Intake & Deduplication</span>
+        </div>
+        <a href="workflows/Intake.json" download class="btn-download">Download</a>
+      </div>
+
+      <!-- 4. Job Application Coach -->
+      <div class="download-item">
+        <div class="download-info">
+          <h4>Job Application Coach.json</h4>
+          <span>15 Nodes • Multi-Agent Career Advisory</span>
+        </div>
+        <a href="workflows/Job Application Coach.json" download class="btn-download">Download</a>
+      </div>
+
+      <!-- 5. test s3 -->
+      <div class="download-item">
+        <div class="download-info">
+          <h4>test s3.json</h4>
+          <span>17 Nodes • Ops Sentinel & Error Monitor</span>
+        </div>
+        <a href="workflows/test s3.json" download class="btn-download">Download</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Ahmed's Projects &bull; OMNA People Portfolio &bull; Cleaned workflows in <code>D:\Workflow\Job\workflows-public</code>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // CONFIGURATION BLOCK
+    // Copied from Step 3:
+    // Chat Trigger webhookId: 1429b508-1bd4-4841-b2b0-e458d3352c10
+    // Intake Form webhookId: b0267256-80c5-429c-adb4-c034aa407bba
+    // Coach Form webhookId: 2a35c387-0179-4f99-b199-0370360e9a82
+    const CONFIG = {
+      n8nBase: localStorage.getItem("ahmed_n8n_base") || "https://YOUR-DOMAIN.ngrok-free.app",
+      chat: "/webhook/1429b508-1bd4-4841-b2b0-e458d3352c10/chat",
+      applyForm: "/form/b0267256-80c5-429c-adb4-c034aa407bba",
+      coachForm: "/form/2a35c387-0179-4f99-b199-0370360e9a82"
+    };
+
+    const $ = s => document.querySelector(s);
+    const sessionId = crypto.randomUUID();
+
+    // RULE 1: Keep ngrok-skip-browser-warning in the chat request
+    const HEADERS = {
+      "Content-Type": "application/json",
+      "ngrok-skip-browser-warning": "1"
+    };
+
+    // Initialize ngrok input field
+    const ngrokInput = $("#ngrokInput");
+    if (ngrokInput) {
+      ngrokInput.value = CONFIG.n8nBase;
+    }
+
+    function updateFormLinks() {
+      const applyEl = $("#applyLink");
+      const coachEl = $("#coachLink");
+      if (applyEl) applyEl.href = CONFIG.n8nBase + CONFIG.applyForm;
+      if (coachEl) coachEl.href = CONFIG.n8nBase + CONFIG.coachForm;
+    }
+    updateFormLinks();
+
+    function setStatus(online) {
+      const statusEl = $("#status");
+      statusEl.textContent = online ? "Online" : "Offline, please try again later";
+      statusEl.className = "badge " + (online ? "on" : "off");
+      document.querySelectorAll("#applyLink, #coachLink").forEach(a => a.classList.toggle("disabled", !online));
+    }
+
+    // Any answer from the chat webhook means n8n and ngrok are both running.
+    // When either is off, ngrok's error page has no CORS headers, so fetch fails.
+    async function checkStatus() {
+      const statusEl = $("#status");
+      statusEl.textContent = "Checking…";
+      statusEl.className = "badge";
+      
+      try {
+        await fetch(CONFIG.n8nBase + CONFIG.chat, {
+          method: "POST",
+          headers: HEADERS,
+          body: JSON.stringify({ action: "loadPreviousSession", sessionId })
+        });
+        setStatus(true);
+      } catch (err) {
+        setStatus(false);
+      }
+    }
+    checkStatus();
+
+    // RULE 3: Use textContent for anything a visitor or the AI writes, never innerHTML
+    function add(cls, text) {
+      const d = document.createElement("div");
+      d.className = cls;
+      d.textContent = text;
+      $("#msgs").append(d);
+      $("#msgs").scrollTop = $("#msgs").scrollHeight;
+      return d;
+    }
+
+    // Connect & Test Button
+    $("#updateNgrokBtn").onclick = () => {
+      let val = ngrokInput.value.trim().replace(/\/+$/, "");
+      if (!val) return;
+      if (!val.startsWith("http://") && !val.startsWith("https://")) {
+        val = "https://" + val;
+      }
+      CONFIG.n8nBase = val;
+      localStorage.setItem("ahmed_n8n_base", val);
+      updateFormLinks();
+      checkStatus();
+    };
+
+    // Chat Form Submit
+    $("#ask").onsubmit = async e => {
+      e.preventDefault();
+      const qInput = $("#q");
+      const q = qInput.value.trim();
+      if (!q) return;
+      qInput.value = "";
+      
+      add("me", q);
+      const bot = add("bot", "…");
+
+      try {
+        const r = await fetch(CONFIG.n8nBase + CONFIG.chat, {
+          method: "POST",
+          headers: HEADERS,
+          body: JSON.stringify({ action: "sendMessage", sessionId, chatInput: q })
+        });
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        const data = await r.json();
+        // RULE 3: Assign to textContent only
+        bot.textContent = data.output || "No response text received.";
+        setStatus(true);
+      } catch (err) {
+        bot.textContent = "The HR assistant is offline right now. Please verify that your n8n and ngrok are running.";
+        setStatus(false);
+      }
+    };
+
+    // Suggestion chips
+    document.querySelectorAll(".chip").forEach(chip => {
+      chip.onclick = () => {
+        $("#q").value = chip.getAttribute("data-q");
+        $("#ask").dispatchEvent(new Event("submit"));
+      };
+    });
+  </script>
+</body>
+</html>
